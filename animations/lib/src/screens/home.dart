@@ -1,6 +1,7 @@
 import 'package:animations/src/widgets/cat.dart';
 import 'package:flutter/material.dart';
 import '../widgets/cat.dart';
+import 'dart:math';
 
 class Home extends StatefulWidget{
   HomeState createState() => HomeState();
@@ -15,10 +16,10 @@ class HomeState extends State<Home> with TickerProviderStateMixin{
     super.initState();
 
     catController = AnimationController(
-      duration: Duration(seconds: 2),
+      duration: Duration(milliseconds: 200),
       vsync: this,
     );
-    catAnimation = Tween(begin: 0.0, end: 100.0).animate(
+    catAnimation = Tween(begin: -20.0, end: -80.0).animate(
       CurvedAnimation(
         parent: catController,
         curve: Curves.easeIn,
@@ -41,22 +42,52 @@ class HomeState extends State<Home> with TickerProviderStateMixin{
           title: Text('Animations!'),
         ),
         body: GestureDetector(
-          child: buildAnimation(),
+          child: Center(
+            child: Stack(
+              overflow: Overflow.visible,
+              children: [
+                buildCatAnimation(),
+                buildBox(),
+                buildLeftFlap(),
+              ],
+            ),
+          ),
           onTap: onTap,
         )
       );
   }
 
-  Widget buildAnimation(){
+  Widget buildCatAnimation(){
     return AnimatedBuilder(
       animation: catAnimation,
       builder: (context, child){
-        return Container(
+        return Positioned(
           child: child,
-          margin: EdgeInsets.only(top: catAnimation.value),
+          top: catAnimation.value,
+          right: 0.0,
+          left: 0.0,
         );
       },
       child: Cat(),
     );
   } 
+
+  Widget buildBox(){
+    return Container(
+      height: 200.00,
+      width: 200.00,
+      color: Colors.brown,
+    );
+  }
+
+  Widget buildLeftFlap(){
+    return Transform.rotate(
+      child: Container(
+        height: 10.0,
+        width: 125.0,
+        color: Colors.red,
+      ),
+      angle: pi/2.0,
+    );
+  }
 }
