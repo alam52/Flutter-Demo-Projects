@@ -1,6 +1,7 @@
 # login_bloc
 
 A new Flutter project.
+User Login using BLOC, Stream and StreamController.
 
 ## Getting Started
 
