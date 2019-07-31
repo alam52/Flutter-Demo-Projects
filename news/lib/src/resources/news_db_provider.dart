@@ -35,7 +35,7 @@ class NewsDbProvider {
         """);
       }
     ); // initial setup for when user installs the app for the first time or restarts 
-
+  }
     fetchItem(int id) async{
       final maps = await db.query(
         "Items",
@@ -48,5 +48,8 @@ class NewsDbProvider {
       }
       return null;
     }
+
+  addItem(ItemModel item) {
+    return db.insert("Items", item.toMapForDb());
   }
 }
