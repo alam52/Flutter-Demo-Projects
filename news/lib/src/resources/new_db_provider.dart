@@ -35,5 +35,15 @@ class NewsDbProvider {
         """);
       }
     ); // initial setup for when user installs the app for the first time or restarts 
+
+    fetchItem(int id) async{
+      final maps = await db.query(
+        "Items",
+        columns: null,
+        where: "id = ?",
+        whereArgs: [id],
+      );
+    }
+
   }
 }
