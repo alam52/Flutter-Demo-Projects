@@ -8,7 +8,7 @@ import '../models/item_model.dart';
 class NewsDbProvider {
   Database db;
   
-  init() async{
+  void init() async{
     Directory documentsDirectory = await getApplicationDocumentsDirectory(); // creates new directory type variable
     final path = join(documentsDirectory.path,"items.db");
     db = await openDatabase(
@@ -36,7 +36,7 @@ class NewsDbProvider {
       }
     ); // initial setup for when user installs the app for the first time or restarts 
   }
-    fetchItem(int id) async{
+    Future<ItemModel> fetchItem(int id) async{
       final maps = await db.query(
         "Items",
         columns: null,
@@ -49,7 +49,7 @@ class NewsDbProvider {
       return null;
     }
 
-  addItem(ItemModel item) {
+  Future<int> addItem(ItemModel item) {
     return db.insert("Items", item.toMapForDb());
   }
 }
