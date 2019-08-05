@@ -21,3 +21,11 @@ class Repository {
     return item;
   }
 }
+
+abstract class Source{
+
+}
+
+abstract class Cache{
+  
+}
