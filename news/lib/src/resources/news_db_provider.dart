@@ -1,3 +1,4 @@
+import 'package:news/src/resources/news_api_provider.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
@@ -6,8 +7,12 @@ import 'dart:async';
 import 'repository.dart';
 import '../models/item_model.dart';
 
-class NewsDbProvider implements Source{
+class NewsDbProvider implements Source,Cache{
   Database db;
+
+  NewsDbProvider(){
+    init();
+  }
   
   void init() async{
     Directory documentsDirectory = await getApplicationDocumentsDirectory(); // creates new directory type variable
@@ -58,5 +63,5 @@ class NewsDbProvider implements Source{
   Future<List<int>> fetchTopIds(){
     return null;
   }
-
 }
+final newsDbProvider = NewsDbProvider();
