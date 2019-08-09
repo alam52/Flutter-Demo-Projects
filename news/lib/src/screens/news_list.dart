@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
 
 class NewsList extends StatelessWidget{
   Widget build(context){
@@ -15,10 +16,23 @@ class NewsList extends StatelessWidget{
       itemCount: 1000,
       itemBuilder: (context,int index){
         return FutureBuilder(
-          future: ,
-          builder: (context,snapshot),
+          future: getFuture(),
+          builder: (context, snapshot){
+            return Container(
+              height: 80.0,
+              child: snapshot.hasData
+              ?Text('I.m visible $index')
+              :Text('You can\'t see me $index'));
+          },
         );
       },
     );
   }
+
+  getFuture(){
+    return Future.delayed(
+      Duration(seconds: 1),
+        () => 'hi',
+      );
+    }
 }
