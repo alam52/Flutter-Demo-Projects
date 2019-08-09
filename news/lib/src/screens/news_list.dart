@@ -6,7 +6,19 @@ class NewsList extends StatelessWidget{
       appBar: AppBar(
         title: Text('Top News'),
       ),
-      body: Text('Show some news here!'),
+      body: buildList(),
+    );
+  }
+
+  Widget buildList(){
+    return ListView.builder(
+      itemCount: 1000,
+      itemBuilder: (context,int index){
+        return FutureBuilder(
+          future: ,
+          builder: (context,snapshot),
+        );
+      },
     );
   }
 }
